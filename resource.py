@@ -36,7 +36,6 @@ def get_weather(location):
     plt.xlabel("no. of days")
     plt.ylabel("Temperature in Fahrenhiet")
     ax = plt.gca()
-    ax.legend(fontsize = 14)
     report.plot(kind = 'line', x = 'day', y = 'high', ax = ax)
     report.plot(kind = 'line', x = 'day', y = 'low', color = 'red', ax = ax)
     report.plot(kind = 'bar', x = 'day', y = 'humidity', color = 'green', ax = ax)
