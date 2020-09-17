@@ -13,7 +13,7 @@ class weather():
         self.concat = '&'    
           
     def send_request(self):
-        #Prepare signature string
+        #Prepare signature
         merged_params = self.query.copy()
         merged_params.update(self.oauth)
         sorted_params = [k + '=' + urllib.parse.quote(merged_params[k], safe='') for k in sorted(merged_params.keys())]
@@ -57,7 +57,7 @@ class weather():
         return self.send_request()
     
     def lat_lon(self, lat, lon):
-        # Returns a dictionary of weather data
+        # Returns a dictionary of weather data with lattitude and longitude
         self.query = {'lat' : lat, 'lon' : lon, 'format': 'json'}
         self.url = 'https://weather-ydn-yql.media.yahoo.com/forecastrss'
         self.oauth = {
