@@ -2,7 +2,6 @@ from matplotlib import pyplot as plt
 from lib.weather import weather
 from pprint import pprint
 import pandas as pd
-import requests
 import json
 
 #yahoo URL
@@ -12,6 +11,7 @@ url = "https://weather-ydn-yql.media.yahoo.com/forecastrss"
 app = weather(url)
 
 def get_weather(location):
+    #getting temperature, humidity and forecast details
     weatherHash = {}
     forecast = app.get_forcastrss(location)
     # pprint(forecast)
@@ -26,12 +26,14 @@ def get_weather(location):
     high = [ sub['high'] for sub in forecast['forecasts'] ]
     low = [ sub['low'] for sub in forecast['forecasts'] ]
 
+    #dumping into pandas dataframe
     df1 = pd.DataFrame(list(zip(day, high, low)), columns = ['day', 'high', 'low'])
     df2 = pd.DataFrame(weatherHash, index = [0])
     report = df1.join(df2)
     report.sort_values(by='day')
     # print(report)
     
+    #using matplotlib to plot graph
     plt.title("Temperature anomalies")
     plt.xlabel("no. of days")
     plt.ylabel("Temperature in Fahrenhiet")
@@ -43,6 +45,6 @@ def get_weather(location):
     plt.show()
     
 if __name__ == "__main__":
-    get_weather(input("Specify Location:"))
+    get_weather(input("Specify Locaion:"))
 
     
